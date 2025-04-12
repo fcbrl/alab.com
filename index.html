@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALab - Publication</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#10b981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Open Sans', sans-serif;
+color: #333;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Merriweather', serif;
+}
+.article-title {
+font-family: 'Merriweather', serif;
+font-weight: 700;
+}
+.nav-link {
+position: relative;
+}
+.nav-link.active::after {
+content: '';
+position: absolute;
+bottom: -8px;
+left: 0;
+width: 100%;
+height: 2px;
+background-color: #3b82f6;
+}
+.article-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.article-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.masonry-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+grid-gap: 20px;
+grid-auto-flow: dense;
+}
+.masonry-item:nth-child(3n) {
+grid-row: span 2;
+}
+.masonry-item:nth-child(5n) {
+grid-column: span 2;
+}
+@media (max-width: 768px) {
+.masonry-grid {
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.masonry-item:nth-child(5n) {
+grid-column: span 1;
+}
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+-webkit-appearance: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.custom-checkbox {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.custom-checkbox input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.checkmark {
+height: 20px;
+width: 20px;
+background-color: #fff;
+border: 2px solid #cbd5e1;
+border-radius: 4px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: #3b82f6;
+border-color: #3b82f6;
+}
+.checkmark:after {
+content: "";
+display: none;
+width: 6px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 48px;
+height: 24px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e2e8f0;
+transition: .4s;
+border-radius: 24px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #3b82f6;
+}
+input:checked + .slider:before {
+transform: translateX(24px);
+}
+.custom-radio {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.custom-radio input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.radio-mark {
+height: 20px;
+width: 20px;
+background-color: #fff;
+border: 2px solid #cbd5e1;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.custom-radio input:checked ~ .radio-mark {
+border-color: #3b82f6;
+}
+.radio-mark:after {
+content: "";
+display: none;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background-color: #3b82f6;
+}
+.custom-radio input:checked ~ .radio-mark:after {
+display: block;
+}
+.back-to-top {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 99;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.back-to-top.show {
+opacity: 1;
+visibility: visible;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<a href="#"><img src="https://static.readdy.ai/image/c3c78a3aa0f2dcdfe6bf9b9556341649/ab3967b1319ee2946961d6a403c063bf.png" alt="ALab Logo" class="h-8"></a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center space-x-8">
+<a href="#" class="nav-link active text-gray-800 font-medium hover:text-primary transition">Home</a>
+<a href="#" class="nav-link text-gray-800 font-medium hover:text-primary transition">About</a>
+<a href="#" class="nav-link text-gray-800 font-medium hover:text-primary transition">Photos</a>
+<a href="#" class="nav-link text-gray-800 font-medium hover:text-primary transition">Articles</a>
+</nav>
+<!-- Mobile Menu Button -->
+<div class="md:hidden flex items-center">
+<button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-700">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Navigation -->
+<div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+<div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+<a href="#" class="py-2 text-gray-800 font-medium hover:text-primary transition">Home</a>
+<a href="#" class="py-2 text-gray-800 font-medium hover:text-primary transition">About</a>
+<a href="#" class="py-2 text-gray-800 font-medium hover:text-primary transition">Photos</a>
+<a href="#" class="py-2 text-gray-800 font-medium hover:text-primary transition">Articles</a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20">
+<!-- Featured Article -->
+<section class="container mx-auto px-4 py-10">
+<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-7/12">
+<div class="w-full h-full bg-blue-100"></div>
+</div>
+<div class="md:w-5/12 p-6 md:p-8 flex flex-col justify-center">
+<div class="mb-3">
+<span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h1 class="article-title text-2xl md:text-3xl lg:text-4xl mb-4 leading-tight">Example Featured Article Title</h1>
+<p class="text-gray-600 mb-6">This is an example featured article description. You can add your own content here through the admin panel. The text can be as long as needed to fill this space appropriately.</p>
+<div class="flex items-center mb-6">
+<div class="w-10 h-10 rounded-full bg-gray-200"></div>
+<div class="ml-3">
+<p class="text-sm font-medium">Example Author</p>
+<p class="text-xs text-gray-500">Author Title</p>
+</div>
+</div>
+<a href="#" class="inline-flex items-center justify-center bg-primary text-white px-6 py-3 font-medium !rounded-button hover:bg-blue-600 transition whitespace-nowrap">
+Read Full Article
+<i class="ri-arrow-right-line ml-2"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Articles -->
+<section class="container mx-auto px-4 py-10">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-2xl md:text-3xl font-bold">Recent Articles</h2>
+<a href="#" class="text-primary font-medium flex items-center hover:underline">
+View All
+<i class="ri-arrow-right-line ml-1"></i>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Example Article 1 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-red-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 1</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">This is an example article description. You can add your own content here through the admin panel.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+<!-- Example Article 2 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-blue-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 2</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">This is another example article description. Add your content through the admin panel.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+<!-- Example Article 3 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-green-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 3</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">Yet another example article description. Content can be managed through the admin panel.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+<!-- Example Article 4 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-purple-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 4</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">Example article description. Manage all content through the admin interface.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+<!-- Example Article 5 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-yellow-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 5</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">Sample article description. All content is manageable through the admin panel.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+<!-- Example Article 6 -->
+<div class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="w-full h-48 bg-pink-100"></div>
+<div class="p-6">
+<div class="mb-3">
+<span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full">Example Category</span>
+<span class="text-gray-500 text-sm ml-3">April 12, 2025</span>
+</div>
+<h3 class="article-title text-xl mb-3 leading-tight">Example Article 6</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">Final example article description. Easily manage content through the admin interface.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200"></div>
+<p class="text-sm font-medium ml-2">Example Author</p>
+</div>
+<a href="#" class="text-primary text-sm font-medium hover:underline">Read More</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="container mx-auto px-4 py-10">
+<h2 class="text-2xl md:text-3xl font-bold mb-8">Explore by Category</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition">
+<div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 bg-blue-100 text-primary rounded-full">
+<i class="ri-book-line ri-lg"></i>
+</div>
+<h3 class="font-semibold">Literary</h3>
+<p class="text-sm text-gray-500 mt-1">45 Articles</p>
+</a>
+<a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition">
+<div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 bg-green-100 text-green-700 rounded-full">
+<i class="ri-newspaper-line ri-lg"></i>
+</div>
+<h3 class="font-semibold">News</h3>
+<p class="text-sm text-gray-500 mt-1">62 Articles</p>
+</a>
+<a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition">
+<div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 bg-purple-100 text-purple-700 rounded-full">
+<i class="ri-article-line ri-lg"></i>
+</div>
+<h3 class="font-semibold">Feature</h3>
+<p class="text-sm text-gray-500 mt-1">38 Articles</p>
+</a>
+<a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition">
+<div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 bg-red-100 text-red-700 rounded-full">
+<i class="ri-basketball-line ri-lg"></i>
+</div>
+<h3 class="font-semibold">Sports</h3>
+<p class="text-sm text-gray-500 mt-1">29 Articles</p>
+</a>
+<a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition">
+<div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 bg-yellow-100 text-yellow-700 rounded-full">
+<i class="ri-mic-line ri-lg"></i>
+</div>
+<h3 class="font-semibold">Interviews</h3>
+<p class="text-sm text-gray-500 mt-1">24 Articles</p>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<div>
+<a href="#"><img src="https://static.readdy.ai/image/c3c78a3aa0f2dcdfe6bf9b9556341649/ab3967b1319ee2946961d6a403c063bf.png" alt="ALab Logo" class="h-8 mb-4"></a>
+<p class="text-gray-400 mb-6">[short description about alab]</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+<i class="ri-twitter-x-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+<i class="ri-linkedin-fill"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Photos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Articles</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Categories</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Literary</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">News</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Feature</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Sports</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Interviews</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Contact</h3>
+<ul class="space-y-3">
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-400">
+<i class="ri-mail-line"></i>
+</div>
+<a href="mailto:lhsdepartmentalpaper@gmail.com" class="text-gray-400 hover:text-white transition">lhsdepartmentalpaper@gmail.com</a>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-400">
+<i class="ri-facebook-fill"></i>
+</div>
+<a href="#" class="text-gray-400 hover:text-white transition">ALab</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 ALab Publication. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 text-sm hover:text-white transition">Privacy Policy</a>
+<a href="#" class="text-gray-500 text-sm hover:text-white transition">Terms of Service</a>
+<a href="#" class="text-gray-500 text-sm hover:text-white transition">Cookie Policy</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<script>
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+if (mobileMenu.classList.contains('hidden')) {
+mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+} else {
+mobileMenuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+}
+});
+});
+// Back to Top Button
+document.addEventListener('DOMContentLoaded', function() {
+const backToTopButton = document.getElementById('back-to-top');
+window.addEventListener('scroll', function() {
+if (window.pageYOffset > 300) {
+backToTopButton.classList.add('show');
+} else {
+backToTopButton.classList.remove('show');
+}
+});
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+});
+// Admin Panel Functions
+document.addEventListener('DOMContentLoaded', function() {
+// Check if user is admin (You'll need to implement proper authentication)
+const isAdmin = localStorage.getItem('isAdmin') === 'true';
+if (isAdmin) {
+// Add Admin Controls
+const adminControls = document.createElement('div');
+adminControls.className = 'fixed bottom-4 left-4 z-50';
+adminControls.innerHTML = `
+<button id="addArticleBtn" class="bg-primary text-white px-4 py-2 rounded-button shadow-lg flex items-center">
+<i class="ri-add-line mr-2"></i>
+Add Article
+</button>
+`;
+document.body.appendChild(adminControls);
+// Add Article Modal
+const modalHtml = `
+<div id="articleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+<div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-4">
+<h2 class="text-2xl font-bold mb-4">Add New Article</h2>
+<form id="articleForm" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+<input type="text" name="title" class="w-full px-3 py-2 border rounded-button" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+<input type="text" name="category" class="w-full px-3 py-2 border rounded-button" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+<textarea name="description" class="w-full px-3 py-2 border rounded-button" rows="4" required></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Cover Image</label>
+<input type="file" name="image" accept="image/*" class="w-full" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Author Name</label>
+<input type="text" name="author" class="w-full px-3 py-2 border rounded-button" required>
+</div>
+<div class="flex justify-end space-x-3">
+<button type="button" id="cancelArticle" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+<button type="submit" class="bg-primary text-white px-4 py-2 rounded-button">Save Article</button>
+</div>
+</form>
+</div>
+</div>
+`;
+document.body.insertAdjacentHTML('beforeend', modalHtml);
+// Modal Controls
+const modal = document.getElementById('articleModal');
+const addArticleBtn = document.getElementById('addArticleBtn');
+const cancelBtn = document.getElementById('cancelArticle');
+const articleForm = document.getElementById('articleForm');
+addArticleBtn.addEventListener('click', () => {
+modal.classList.remove('hidden');
+});
+cancelBtn.addEventListener('click', () => {
+modal.classList.add('hidden');
+articleForm.reset();
+});
+articleForm.addEventListener('submit', (e) => {
+e.preventDefault();
+const formData = new FormData(articleForm);
+// Here you would typically send the data to your backend
+console.log('Article Data:', Object.fromEntries(formData));
+// Show success message
+const successMessage = document.createElement('div');
+successMessage.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg';
+successMessage.textContent = 'Article saved successfully!';
+document.body.appendChild(successMessage);
+setTimeout(() => {
+successMessage.remove();
+}, 3000);
+modal.classList.add('hidden');
+articleForm.reset();
+});
+}
+});
+</script>
+</body>
+</html>
